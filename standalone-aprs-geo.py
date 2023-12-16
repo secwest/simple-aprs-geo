@@ -123,6 +123,12 @@ aprs_frequencies = {
 }
 # Function to determine the appropriate APRS frequency
 def get_aprs_frequency(lon, lat):
+    # Check specific countries first
+    for country, coords in country_coordinates.items():
+        polygon = Polygon(coords)
+        if polygon.contains(lon, lat):
+            return aprs_frequencies.get(country, aprs_frequencies['Default'])
+
     # Check if within longitude boundaries for the Americas
     if -167.5 <= lon <= -25.0:  # Longitude range for the Americas
         return aprs_frequencies['North America']
@@ -131,11 +137,8 @@ def get_aprs_frequency(lon, lat):
     elif -25.0 < lon < 40.0:  # Approximate longitude range for Europe
         return aprs_frequencies['Europe']
 
-    # Check other countries
-       for country, coords in country_coordinates.items():
-        polygon = Polygon(coords)
-        if polygon.contains(lon, lat):
-            return aprs_frequencies.get(country, aprs_frequencies['Default'])
+    # Default frequency if not in any specific country or region
+    return aprs_frequencies['Default']
 
 
 # Example GPS coordinates and determining the APRS frequency
