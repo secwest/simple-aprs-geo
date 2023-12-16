@@ -133,7 +133,7 @@ def get_aprs_frequency(lon, lat):
     if -167.5 <= lon <= -25.0:  # Longitude range for the Americas
         return aprs_frequencies['North America']
 
-    # Check if within longitude boundaries for Europe
+    # Check if within longitude boundaries for Europe & Africa
     elif -25.0 < lon < 40.0:  # Approximate longitude range for Europe
         return aprs_frequencies['Europe']
 
