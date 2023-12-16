@@ -99,11 +99,6 @@ country_coordinates = {
         (0.3, 50.7), (-5.2, 50.0)
     ],
 }
-# Create polygons for each country
-country_polygons = {}
-for country, coords in country_coordinates.items():
-    polygon = Polygon(coords)
-    country_polygons[country] = polygon
 
 # Define APRS frequencies for the countries
 aprs_frequencies = {
